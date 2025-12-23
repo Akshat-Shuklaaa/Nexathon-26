@@ -5,6 +5,7 @@ import { Menu, X, Terminal, Moon, Sun } from "lucide-react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { navigationData } from "@/lib/data"
+import Image from "next/image"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -45,15 +46,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18 md:h-20">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 md:w-12 md:h-12 border-2 border-primary/50 rounded-xl flex items-center justify-center bg-card/50 group-hover:bg-primary/10 group-hover:border-primary transition-all duration-300">
-              <Terminal className="w-5 h-5 text-primary absolute opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="font-[var(--font-orbitron)] text-primary text-lg md:text-xl font-bold group-hover:opacity-0 transition-opacity">
-                N
-              </span>
-            </div>
-            <span className="font-[var(--font-orbitron)] text-lg md:text-xl font-bold text-foreground hidden sm:block">
-              {navigationData.logo.text}<span className="text-primary">{navigationData.logo.subtitle}</span>
-            </span>
+            <Image
+  src="/logo.png"
+  alt="Logo"
+  width={90}
+  height={90}
+  className="w-[160px] h-[120px] object-contain"
+/>
+
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">

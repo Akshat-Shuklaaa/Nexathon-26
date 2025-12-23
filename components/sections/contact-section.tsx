@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin, Send, MessageSquare, Instagram, Linkedin, Globe } 
 import SectionHeader from "@/components/features/section-header"
 import ScrollAnimation from "@/components/features/scroll-animation"
 import TiltCard from "@/components/features/tilt-card"
+import Image from "next/image"
 
 const contactInfo = [
   {
@@ -130,13 +131,13 @@ export default function ContactSection() {
               {/* College Logo Placeholder with float animation */}
               <div className="flex items-center gap-4 pt-4">
                 <div className="w-16 h-16 border border-dashed border-primary/50 rounded-lg flex items-center justify-center float-3d hover:border-primary transition-colors">
-                  <span className="font-[var(--font-rajdhani)] text-primary text-xs">COLLEGE</span>
+                  <Image src="/VIT_COLOURED.png" alt="College Logo" width={64} height={64} className="w-16 h-16 object-contain" />
                 </div>
                 <div
                   className="w-16 h-16 border border-dashed border-primary/50 rounded-lg flex items-center justify-center float-3d hover:border-primary transition-colors"
                   style={{ animationDelay: "-2s" }}
                 >
-                  <span className="font-[var(--font-rajdhani)] text-primary text-xs">LOGO</span>
+                  <Image src="/logo.png" alt="College Logo" width={64} height={64} className="w-16 h-16 object-contain" />
                 </div>
               </div>
             </div>

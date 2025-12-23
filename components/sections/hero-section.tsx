@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Calendar, MapPin, Users, Terminal, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { useLenis } from "@/components/providers/smooth-scroll-provider"
@@ -12,6 +12,29 @@ export default function HeroSection() {
   const [mounted, setMounted] = useState(false)
   const [currentText, setCurrentText] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [scrollIndicatorSeen, setScrollIndicatorSeen] = useState(false)
+const [hideScrollIndicator, setHideScrollIndicator] = useState(false)
+
+
+const scrollIndicatorRef = useRef<HTMLDivElement | null>(null)
+
+useEffect(() => {
+  if (!scrollIndicatorRef.current) return
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setScrollIndicatorSeen(true)
+        observer.disconnect()
+      }
+    },
+    { threshold: 0.6 } // 60% visible = seen
+  )
+
+  observer.observe(scrollIndicatorRef.current)
+
+  return () => observer.disconnect()
+}, [])
   const lenis = useLenis()
 
   useEffect(() => {
@@ -33,6 +56,19 @@ export default function HeroSection() {
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
+  useEffect(() => {
+  if (!scrollIndicatorSeen) return
+
+  const handleScroll = () => {
+    setHideScrollIndicator(true)
+    window.removeEventListener("scroll", handleScroll)
+  }
+
+  window.addEventListener("scroll", handleScroll, { passive: true })
+  return () => window.removeEventListener("scroll", handleScroll)
+}, [scrollIndicatorSeen])
+
+
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
@@ -191,6 +227,28 @@ export default function HeroSection() {
         </div>
 
         {/* Scroll indicator */}
+<div
+  ref={scrollIndicatorRef}
+  className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-700 ${
+    mounted && !hideScrollIndicator
+      ? "opacity-100 translate-y-0"
+      : "opacity-0 translate-y-6 pointer-events-none"
+  }`}
+>
+  <Link
+    href="#about"
+    className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 group"
+  >
+    <span className="font-[var(--font-space)] text-xs tracking-widest uppercase">
+      Scroll to explore
+    </span>
+    <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center pt-2 group-hover:border-primary transition-colors duration-300">
+      <div className="w-1 h-2 bg-current rounded-full animate-bounce group-hover:bg-primary" />
+    </div>
+  </Link>
+</div>
+
+
         <div
           className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-700 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"

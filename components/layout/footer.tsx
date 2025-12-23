@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { Heart, ArrowUp, Terminal } from "lucide-react"
+import Image from "next/image"
 import { useLenis } from "@/components/providers/smooth-scroll-provider"
 
 const footerLinks = {
@@ -95,13 +96,13 @@ export default function Footer() {
                 className="w-12 h-12 border border-dashed border-primary/30 rounded-lg flex items-center justify-center hover:border-primary/60 transition-all duration-300 float"
                 style={{ animationDelay: "0s" }}
               >
-                <span className="text-xs text-muted-foreground">Logo</span>
+                <Image src="/logo.png" alt="Logo" width={64} height={64} className="w-16 h-16 object-contain" />
               </div>
               <div
                 className="w-12 h-12 border border-dashed border-primary/30 rounded-lg flex items-center justify-center hover:border-primary/60 transition-all duration-300 float"
                 style={{ animationDelay: "1s" }}
               >
-                <span className="text-xs text-muted-foreground">College</span>
+                <Image src="/VIT_COLOURED.png" alt="College Logo" width={64} height={64} className="w-16 h-16 object-contain" />
               </div>
             </div>
           </div>

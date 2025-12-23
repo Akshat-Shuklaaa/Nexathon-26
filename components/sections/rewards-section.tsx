@@ -140,8 +140,6 @@ export default function RewardsSection() {
             </div>
           </TiltCard>
         </ScrollAnimation>
-
-        <ContactCTA />
       </div>
     </section>
   )

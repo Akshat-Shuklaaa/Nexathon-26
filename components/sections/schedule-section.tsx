@@ -122,8 +122,6 @@ export default function ScheduleSection() {
             </ScrollAnimation>
           ))}
         </div>
-
-        <ContactCTA />
       </div>
     </section>
   )

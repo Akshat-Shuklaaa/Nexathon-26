@@ -89,8 +89,6 @@ export default function ThemeSection() {
             </ScrollAnimation>
           ))}
         </div>
-
-        <ContactCTA />
       </div>
     </section>
   )

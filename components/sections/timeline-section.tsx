@@ -260,8 +260,6 @@ export default function TimelineSection() {
         </ScrollAnimation>
 
         <Timeline data={timelineData} />
-
-        <ContactCTA />
       </div>
     </section>
   )

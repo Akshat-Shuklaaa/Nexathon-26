@@ -112,8 +112,6 @@ export default function AboutSection() {
             </ScrollAnimation>
           ))}
         </div>
-
-        <ContactCTA />
       </div>
     </section>
   )

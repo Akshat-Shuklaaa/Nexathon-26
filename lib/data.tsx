@@ -49,7 +49,7 @@ export const eventInfo = {
   tagline: "Build. Innovate. Transform.",
   shortDescription: "24-hour coding marathon at VIT CHENNAI",
   longDescription:
-    "NEXATHON is not just a hackathon—it's a movement. We bring together the brightest minds from across the nation to solve real-world problems through technology and innovation at VIT CHENNAI.",
+    "NEXATHON is not just a hackathon—it's a movement. We bring together the brightest minds from across the nation to solve real-world problems through technology and innovation at Nexus.",
   date: "First week of March, 2026",
   duration: "24 Hours",
   venue: "VIT CHENNAI",

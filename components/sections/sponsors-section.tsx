@@ -117,8 +117,6 @@ export default function SponsorsSection() {
             </div>
           </TiltCard>
         </ScrollAnimation>
-
-        <ContactCTA />
       </div>
     </section>
   )

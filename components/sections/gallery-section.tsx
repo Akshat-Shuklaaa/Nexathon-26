@@ -98,10 +98,6 @@ export default function GallerySection() {
         </div>
       </ScrollAnimation>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ContactCTA />
-      </div>
-
       <style jsx>{`
         @keyframes gallery-scroll {
           from { transform: translateX(0); }

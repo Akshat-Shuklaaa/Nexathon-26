@@ -233,8 +233,6 @@ export default function RegisterSection() {
             </TiltCard>
           </ScrollAnimation>
         </div>
-
-        <ContactCTA />
       </div>
     </section>
   )
