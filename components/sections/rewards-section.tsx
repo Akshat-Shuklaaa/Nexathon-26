@@ -51,7 +51,7 @@ const benefits = [
 
 export default function RewardsSection() {
   return (
-    <section id="rewards" className="relative py-20 md:py-32">
+    <section id="about" className="relative py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Rewards & Benefits"

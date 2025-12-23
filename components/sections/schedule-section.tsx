@@ -43,7 +43,7 @@ const venueInfo = {
 
 export default function ScheduleSection() {
   return (
-    <section id="schedule" className="relative py-20 md:py-32 bg-muted/30">
+    <section id="about" className="relative py-20 md:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Event Schedule"
