@@ -127,7 +127,18 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground overflow-x-hidden cursor-none;
+  }
+}
+
+/* Hide cursor on interactive elements too so the custom cursor takes over */
+a, button, [role="button"], input, select, textarea {
+  @apply cursor-none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  body, a, button, [role="button"], input, select, textarea {
+    cursor: auto !important;
   }
 }
 

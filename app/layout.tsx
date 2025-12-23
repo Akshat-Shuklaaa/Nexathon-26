@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Orbitron, Rajdhani, Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import CustomCursor from "@/components/ui/custom-cursor"
 import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider"
 import "./globals.css"
 
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body
         className={`${orbitron.variable} ${rajdhani.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
+        <CustomCursor />
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

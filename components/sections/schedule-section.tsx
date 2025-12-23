@@ -85,7 +85,7 @@ export default function ScheduleSection() {
           </TiltCard>
         </ScrollAnimation>
 
-        <div className="grid lg:grid-cols-3 gap-6 perspective-2000">
+        <div className="grid md:grid-cols-2 gap-6 perspective-2000 max-w-5xl mx-auto">
           {scheduleData.map((day, dayIndex) => (
             <ScrollAnimation key={day.day} delay={100 * (dayIndex + 1)}>
               <TiltCard tiltAmount={8} className="h-full">
