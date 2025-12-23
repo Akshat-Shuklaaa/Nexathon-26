@@ -9,7 +9,7 @@
 
 **Code. Create. Conquer.**
 
-[Live Demo](https://adityak.dev) • [Documentation](./docs/HANDOVER.md) • [Contributing](./docs/CONTRIBUTING.md)
+[Live Demo](https://nexathon-26.vercel.app/) • [Documentation](./docs/HANDOVER.md) • [Contributing](./docs/CONTRIBUTING.md)
 
 </div>
 
