@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Orbitron, Rajdhani, Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/layout/theme-provider"
 import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider"
 import "./globals.css"
 
@@ -77,15 +76,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
         className={`${orbitron.variable} ${rajdhani.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <SmoothScrollProvider>
-            {children}
-          </SmoothScrollProvider>
-        </ThemeProvider>
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
         <Analytics />
       </body>
     </html>
