@@ -141,14 +141,20 @@ useEffect(() => {
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-block p-1 rounded-2xl bg-gradient-to-br from-primary/30 via-secondary/20 to-primary/30 holographic group perspective-1000">
-            <div className="p-6 bg-card/80 backdrop-blur-sm rounded-xl transition-transform duration-700 group-hover:scale-105 preserve-3d">
-            <div className="w-28 h-28 md:w-36 md:h-36 border-2 border-dashed border-primary/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-primary/60 transition-all duration-500 float-3d">
-              <Terminal className="w-8 h-8 text-primary/60" />
-                <span className="font-[var(--font-orbitron)] text-primary text-lg font-bold">{heroData.logo.text}</span>
-                <span className="font-[var(--font-orbitron)] text-primary/60 text-xs">{heroData.logo.subtitle}</span>
-                </div>
-            </div>
+          <div className="inline-block p-1 rounded-2xl perspective-1000">
+            {/* <div className="p-6 bg-card/80 backdrop-blur-sm rounded-xl transition-transform duration-700 group-hover:scale-105 preserve-3d"> */}
+            {/* <div className="w-28 h-28 md:w-36 md:h-36 rounded-xl overflow-hidden flex items-center justify-center hover:scale-105 transition-all duration-500 float-3d"> */}
+  <Image
+    src="/club_final.png"   // 👈 put your logo in /public/logo.png
+    alt="Nexathon Logo"
+    width={260}
+    height={260}
+    className="object-contain"
+    priority
+  />
+{/* </div> */}
+
+            {/* </div> */}
           </div>
         </div>
 

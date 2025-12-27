@@ -59,7 +59,7 @@ export const eventInfo = {
   prizePool: "₹5,00,000",
   registrationFee: "₹500 per team",
   teamSize: "2-4 members",
-  edition: "5th Edition",
+  edition: "2nd Edition",
   year: 2026,
 }
 

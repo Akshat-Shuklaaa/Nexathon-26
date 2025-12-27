@@ -38,16 +38,21 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={90}
-              height={90}
-              className="w-[160px] h-[120px] object-contain"
-            />
+         <Link href="/" className="relative flex items-center gap-3 group">
+  {/* Glow */}
+  <div className="absolute inset-0 -z-10 rounded-full blur-2xl bg-primary/20 group-hover:bg-primary/40 transition-all duration-500" />
 
-          </Link>
+  {/* Logo */}
+  <Image
+    src="/logo_final_bg.png"
+    alt="Logo"
+    width={140}
+    height={140}
+    className="w-[120px] h-[100px] mt-2 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300"
+    priority
+  />
+</Link>
+
 
           <div className="hidden lg:flex items-center gap-1">
             {navigationData.links.map((link) => (
