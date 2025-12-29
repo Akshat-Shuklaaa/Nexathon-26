@@ -114,17 +114,17 @@ export default function Footer() {
             </p>
             {/* Logo placeholders with float animation */}
             <div className="flex items-center gap-3">
-              <div
+              {/* <div
                 className="w-12 h-12 border border-dashed border-primary/30 rounded-lg flex items-center justify-center hover:border-primary/60 transition-all duration-300 float"
                 style={{ animationDelay: "0s" }}
-              >
-                <Image src="/logo.png" alt="Logo" width={64} height={64} className="w-16 h-16 object-contain" />
-              </div>
+              > */}
+                <Image src="/club_final.png" alt="Logo" width={80} height={80} className="w-16 h-16 object-contain" />
+              {/* </div> */}
               <div
-                className="w-12 h-12 border border-dashed border-primary/30 rounded-lg flex items-center justify-center hover:border-primary/60 transition-all duration-300 float"
-                style={{ animationDelay: "1s" }}
+                className="justify-center"
+                // style={{ animationDelay: "1s" }}
               >
-                <Image src="/VIT_COLOURED.png" alt="College Logo" width={64} height={64} className="w-16 h-16 object-contain" />
+                <Image src="/vit-blue.png" alt="College Logo" width={80} height={80} className="w-26 h-26 object-contain" />
               </div>
             </div>
           </div>
