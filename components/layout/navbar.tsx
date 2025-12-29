@@ -1,15 +1,110 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { navigationData } from "@/lib/data"
 import Image from "next/image"
+import { useLenis } from "@/components/providers/smooth-scroll-provider"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("")
+  const lenis = useLenis()
+  const pathname = usePathname()
+
+  const handleLinkClick = (e: any, href: string) => {
+    if (!href) return
+    if (!href.startsWith("#")) return
+    e.preventDefault()
+    const id = href.replace("#", "")
+
+    // gradual duration and easing
+    const durationSec = 1.8
+    const durationMs = durationSec * 1000
+    const easeInOutSine = (t: number) => 0.5 * (1 - Math.cos(Math.PI * t))
+
+    // If Lenis is available, use it with easing
+    if (lenis && typeof (lenis as any).scrollTo === "function") {
+      try {
+        ;(lenis as any).scrollTo(href, { duration: durationSec, easing: easeInOutSine })
+        return
+      } catch (err) {
+        // Fall through to native fallback
+      }
+    }
+
+    // Native requestAnimationFrame fallback to mimic Lenis easing
+    const el = document.getElementById(id)
+    if (!el) return
+    const nav = document.querySelector("nav") as HTMLElement | null
+    const offset = nav ? nav.offsetHeight : 0
+    const start = window.scrollY || window.pageYOffset
+    const rectTop = el.getBoundingClientRect().top
+    const target = Math.round(start + rectTop - offset)
+    const distance = target - start
+    let startTime: number | null = null
+
+    const step = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp
+      const elapsed = timestamp - startTime
+      const t = Math.min(1, elapsed / durationMs)
+      const eased = easeInOutSine(t)
+      window.scrollTo(0, Math.round(start + distance * eased))
+      if (t < 1) requestAnimationFrame(step)
+    }
+
+    requestAnimationFrame(step)
+  }
+
+  const handleLogoClick = (e: any) => {
+    // close mobile menu first
+    setIsOpen(false)
+
+    // If not on home path, allow Next.js Link to navigate normally
+    if (pathname !== "/") return
+
+    e.preventDefault()
+
+    // Respect reduced motion preference
+    const prefersReduced = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReduced) {
+      window.scrollTo(0, 0)
+      return
+    }
+
+    // animation settings (match handleLinkClick)
+    const durationSec = 1.8
+    const durationMs = durationSec * 1000
+    const easeInOutSine = (t: number) => 0.5 * (1 - Math.cos(Math.PI * t))
+
+    if (lenis && typeof (lenis as any).scrollTo === "function") {
+      try {
+        ;(lenis as any).scrollTo(0, { duration: durationSec, easing: easeInOutSine })
+        return
+      } catch (err) {
+        // fall through to native fallback
+      }
+    }
+
+    // Native rAF fallback to animate to top (0)
+    const start = window.scrollY || window.pageYOffset
+    const distance = -start
+    let startTime: number | null = null
+
+    const step = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp
+      const elapsed = timestamp - startTime
+      const t = Math.min(1, elapsed / durationMs)
+      const eased = easeInOutSine(t)
+      window.scrollTo(0, Math.round(start + distance * eased))
+      if (t < 1) requestAnimationFrame(step)
+    }
+
+    requestAnimationFrame(step)
+  }
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
@@ -38,7 +133,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" onClick={(e) => handleLogoClick(e)} className="flex items-center gap-3 group">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -54,6 +149,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
                 className={`px-3 py-2 text-sm font-[var(--font-rajdhani)] font-medium transition-all duration-300 relative group ${activeSection === link.href.replace("#", "")
                   ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
@@ -71,6 +167,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="#register"
+              onClick={(e) => handleLinkClick(e, "#register")}
               className="px-6 py-2.5 bg-primary text-primary-foreground font-[var(--font-rajdhani)] font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_25px_oklch(0.65_0.25_250/0.4)] hover:scale-105"
             >
               Register Now
@@ -99,7 +196,10 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => {
+                setIsOpen(false)
+                handleLinkClick(e, link.href)
+              }}
               className={`block px-4 py-3 font-[var(--font-rajdhani)] font-medium rounded-lg transition-all duration-300 ${activeSection === link.href.replace("#", "")
                 ? "text-primary bg-primary/10"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -111,7 +211,10 @@ export default function Navbar() {
           ))}
           <Link
             href="#register"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => {
+              setIsOpen(false)
+              handleLinkClick(e, "#register")
+            }}
             className="block px-4 py-3 bg-primary text-primary-foreground font-[var(--font-rajdhani)] font-semibold rounded-lg text-center mt-4"
           >
             Register Now
