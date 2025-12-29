@@ -62,9 +62,9 @@ export default function FaqSection() {
 
         <div className="space-y-4 perspective-2000">
           {faqs.map((faq, index) => (
-            <ScrollAnimation key={index} delay={50 * (index + 1)}>
+            <ScrollAnimation key={index} delay={0}>
               <div
-                className={`bg-card/60 backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-500 preserve-3d ${
+                className={`bg-card/60 border rounded-2xl overflow-hidden transition-all duration-150 ${
                   openIndex === index
                     ? "border-primary/40 shadow-[0_0_40px_oklch(0.78_0.22_145/0.15)] scale-[1.02]"
                     : "border-border hover:border-primary/20 hover:scale-[1.01]"
@@ -88,17 +88,20 @@ export default function FaqSection() {
                     <ChevronDown className="w-5 h-5 text-primary" />
                   </div>
                 </button>
-                <div
-                  className={`grid transition-all duration-500 ease-out ${
-                    openIndex === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-6 pb-5 border-t border-border/50 pt-4">
-                      <p className="font-[var(--font-sans)] text-muted-foreground leading-relaxed">{faq.answer}</p>
-                    </div>
-                  </div>
-                </div>
+  <div
+  className={`overflow-hidden ${
+    openIndex === index ? "opacity-100" : "opacity-0"
+  } transition-opacity duration-120`}
+>
+  {openIndex === index && (
+    <div className="px-6 pb-5 border-t border-border/50 pt-4">
+      <p className="font-[var(--font-sans)] text-muted-foreground leading-relaxed">
+        {faq.answer}
+      </p>
+    </div>
+  )}
+</div>
+
               </div>
             </ScrollAnimation>
           ))}
