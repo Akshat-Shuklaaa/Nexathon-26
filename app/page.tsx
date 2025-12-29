@@ -21,14 +21,14 @@ export default function Home() {
         <Navbar />
         <HeroSection />
         <AboutSection />
+        <ThemeSection />
         <ScheduleSection />
         <TimelineSection />
         <SponsorsSection />
         <RewardsSection />
         {/* <RegisterSection /> */}
-        <ThemeSection />
-        <FaqSection />
         <GallerySection />
+        <FaqSection />
         <ContactSection />
         <Footer />
       </div>
