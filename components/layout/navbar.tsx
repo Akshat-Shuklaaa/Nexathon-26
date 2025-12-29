@@ -111,16 +111,13 @@ export default function Navbar() {
       
 
       const sections = navigationData.links.map((link) => link.href.replace("#", ""))
-      let found = false
       for (const section of sections.reverse()) {
         const element = document.getElementById(section)
         if (element && element.getBoundingClientRect().top <= 100) {
           setActiveSection(section)
-          found = true
           break
         }
       }
-      if (!found) setActiveSection("")
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -136,7 +133,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18 md:h-20">
-         <Link href="/" onClick={(e) => handleLogoClick(e)} className="relative flex items-center gap-3 group">
+         <Link href="/" className="relative flex items-center gap-3 group">
   {/* Glow */}
   <div className="absolute inset-0 -z-10 rounded-full blur-2xl bg-primary/20 group-hover:bg-primary/40 transition-all duration-500" />
 
