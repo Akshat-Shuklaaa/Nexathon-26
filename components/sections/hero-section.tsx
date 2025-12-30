@@ -121,7 +121,7 @@ useEffect(() => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center perspective-2000">
         {/* College Badge with 3D effect */}
         <div
-          className={`mb-8 transition-all duration-1000 ${
+          className={`mb-1 transition-all duration-1000 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
@@ -137,7 +137,7 @@ useEffect(() => {
 
         {/* Logo placeholder with 3D hover */}
         <div
-          className={`mb-10 transition-all duration-1000 delay-100 ${
+          className={`mb-2 transition-all duration-1000 delay-100 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
@@ -147,8 +147,8 @@ useEffect(() => {
   <Image
     src="/club_final.png"   // 👈 put your logo in /public/logo.png
     alt="Nexathon Logo"
-    width={260}
-    height={260}
+    width={360}
+    height={360}
     className="object-contain"
     priority
   />
