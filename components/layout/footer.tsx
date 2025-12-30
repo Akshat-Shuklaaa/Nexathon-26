@@ -1,46 +1,47 @@
 "use client"
 
 import Link from "next/link"
-import { Heart, ArrowUp, Terminal, Instagram, Linkedin, Github, Globe as GlobeIcon } from "lucide-react"
+import { Heart, ArrowUp, Terminal, Instagram, Linkedin, Github, Globe2Icon, Mail, Phone } from "lucide-react"
 import Image from "next/image"
 import { useLenis } from "@/components/providers/smooth-scroll-provider"
 
 const footerLinks = {
   quickLinks: [
     { label: "About", href: "#about" },
-    { label: "Schedule", href: "#schedule" },
+    // { label: "Schedule", href: "#schedule" },
     { label: "Sponsors", href: "#sponsors" },
-    { label: "Register", href: "#register" },
-  ],
-  resources: [
+    { label: "Register", href: "https://eventhubcc.vit.ac.in/EventHub/" },
     { label: "FAQs", href: "#faq" },
-    { label: "Rules", href: "#" },
-    { label: "Code of Conduct", href: "#" },
-    { label: "Privacy Policy", href: "#" },
   ],
+  // resources: [
+  //   // { label: "Rules", href: "#faq" },
+  //   // { label: "Code of Conduct", href: "#" },
+  //   // { label: "Privacy Policy", href: "#" },
+  // ],
   contact: [
-    { label: "hello@nexathon.tech", href: "mailto:hello@nexathon.tech" },
-    { label: "+91 98765 43210", href: "tel:+919876543210" },
+    { label: "nexusvitc@gmail.com", href: "mailto:nexusvitc@gmail.com", icon: "mail" },
+    { label: "+91 95554 01204", href: "tel:+919555401204", icon: "phone" },
+    { label: "+91 70029 98267", href: "tel:+917002998267", icon: "phone" },
   ],
   social: [
     { 
       label: "Instagram", 
-      href: "https://instagram.com/nexathon",
+      href: "https://www.instagram.com/nexus_vitc/",
       icon: "instagram"
     },
     { 
       label: "LinkedIn", 
-      href: "https://linkedin.com/company/nexathon",
+      href: "https://www.linkedin.com/company/nexusvitchennai/posts/?feedView=all",
       icon: "linkedin"
     },
     { 
       label: "Website", 
-      href: "https://nexathon.tech",
-      icon: "globe"
+      href: "https://nexusvitc-ashen.vercel.app/",
+      icon: "Globe2Icon"
     },
     { 
       label: "GitHub", 
-      href: "https://github.com/nexathon",
+      href: "https://github.com/Nexus-VITC",
       icon: "github"
     },
   ],
@@ -98,9 +99,9 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-16 relative z-10">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Brand with hover effects */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div>
             <Link href="/" className="group flex items-center gap-3 mb-4">
               <div className="w-10 h-10 border-2 border-primary rounded-lg flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
                 <Terminal className="w-5 h-5 text-primary" />
@@ -130,7 +131,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links with hover animations */}
-          <div>
+          <div className="md:ml-auto">
             <h4 className="font-[var(--font-rajdhani)] font-bold text-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footerLinks.quickLinks.map((link, index) => (
@@ -148,7 +149,7 @@ export default function Footer() {
           </div>
 
           {/* Resources */}
-          <div>
+          {/* <div>
             <h4 className="font-[var(--font-rajdhani)] font-bold text-foreground mb-4">Resources</h4>
             <ul className="space-y-2">
               {footerLinks.resources.map((link) => (
@@ -163,10 +164,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact */}
-          <div>
+          <div className="md:ml-auto">
             <h4 className="font-[var(--font-rajdhani)] font-bold text-foreground mb-4">Contact</h4>
             <ul className="space-y-2">
               {footerLinks.contact.map((link) => (
@@ -176,6 +177,8 @@ export default function Footer() {
                     className="group font-[var(--font-sans)] text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2"
                   >
                     <span className="w-0 h-px bg-primary group-hover:w-3 transition-all duration-300" />
+                    {link.icon === 'mail' && <Mail className="w-4 h-4" />}
+                    {link.icon === 'phone' && <Phone className="w-4 h-4" />}
                     {link.label}
                   </a>
                 </li>
@@ -194,7 +197,7 @@ export default function Footer() {
                       {social.icon === 'instagram' && <Instagram className="w-5 h-5" />}
                       {social.icon === 'linkedin' && <Linkedin className="w-5 h-5" />}
                       {social.icon === 'github' && <Github className="w-5 h-5" />}
-                      {social.icon === 'globe' && <GlobeIcon className="w-5 h-5" />}
+                      {social.icon === 'Globe2Icon' && <Globe2Icon className="w-5 h-5" />}
                     </a>
                   ))}
                 </div>
@@ -206,8 +209,8 @@ export default function Footer() {
         {/* Bottom bar with enhanced styling */}
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-[var(--font-sans)] text-sm text-muted-foreground flex items-center gap-1">
-            © 2025 NEXATHON. Made with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> by the
-            NEXATHON Team
+            © 2026 NEXATHON. Made with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> by the
+            NEXUS Team
           </p>
           <div className="flex items-center gap-4">
             <Link
