@@ -11,42 +11,43 @@ const faqs = [
   {
     question: "Who can participate in NEXATHON?",
     answer:
-      "NEXATHON is open to all students and professionals passionate about technology. Whether you're a beginner or an experienced developer, everyone is welcome! Teams can consist of 2-4 members from any college or professional background.",
+      "We are updating the site",
+     
   },
   {
     question: "Is there a registration fee?",
     answer:
-      "Yes, there is a nominal registration fee of ₹500 per team (not per person). This covers meals, swag, and access to all workshops and mentoring sessions. Early bird registrations get a 20% discount!",
+      "We are updating the site",
   },
   {
     question: "What should I bring to the hackathon?",
     answer:
-      "Bring your laptop, charger, and any hardware you might need for your project. We'll provide WiFi, power outlets, food, and beverages. Don't forget your student ID for verification!",
+     "We are updating the site",
   },
   {
     question: "Can I participate without a team?",
     answer:
-      "Yes! We have a team matching session before the hackathon where solo participants can find teammates. You can also join our Discord server to connect with potential team members.",
+     "We are updating the site",
   },
   {
     question: "What are the judging criteria?",
     answer:
-      "Projects are judged on Innovation & Creativity (25%), Technical Complexity (25%), Design & User Experience (20%), Practical Applicability (20%), and Presentation (10%). Our panel includes industry experts and tech leaders.",
+      "We are updating the site",
   },
   {
     question: "Can I work on a pre-existing project?",
     answer:
-      "No, all projects must be built from scratch during the hackathon. However, you can use open-source libraries, APIs, and pre-existing tools. Any code written before the hackathon is not allowed.",
+      "We are updating the site",
   },
   {
     question: "Will there be mentors available?",
     answer:
-      "We have 50+ mentors from leading tech companies who will be available throughout the event to guide you. Mentors cover various domains including AI/ML, Web Development, Blockchain, and Design.",
+      "We are updating the site",
   },
   {
     question: "Is accommodation provided?",
     answer:
-      "The venue is equipped for overnight stay with rest areas. For participants needing formal accommodation, we have partnered with nearby hotels offering special discounts. Details will be shared upon registration confirmation.",
+      "We are updating the site",
   },
 ]
 
