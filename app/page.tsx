@@ -1,3 +1,5 @@
+'use client'
+
 import Navbar from "@/components/layout/navbar"
 import Footer from "@/components/layout/footer"
 import HeroSection from "@/components/sections/hero-section"
@@ -12,8 +14,23 @@ import FaqSection from "@/components/sections/faq-section"
 import GallerySection from "@/components/sections/gallery-section"
 import ContactSection from "@/components/sections/contact-section"
 import MatrixBackground from "@/components/features/matrix-background"
+import { useEffect } from 'react'
 
 export default function Home() {
+    useEffect(() => {
+    // disable browser auto scroll restore
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+
+    // remove hash like /#faq or /#contact on refresh
+    if (window.location.hash) {
+      history.replaceState(null, '', '/')
+    }
+
+    // always jump to top
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <main className="relative min-h-screen bg-background noise-overlay scanlines">
       <MatrixBackground />
