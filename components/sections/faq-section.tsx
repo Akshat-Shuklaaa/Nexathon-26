@@ -107,48 +107,6 @@ export default function FaqSection() {
             </ScrollAnimation>
           ))}
         </div>
-
-        <ScrollAnimation delay={500} className="mt-20">
-          <TiltCard tiltAmount={8}>
-            <div className="relative bg-card/60 backdrop-blur-sm border border-primary/30 rounded-3xl p-10 text-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-              <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-              <div
-                className="absolute bottom-0 left-0 w-40 h-40 bg-secondary/10 rounded-full blur-3xl animate-pulse"
-                style={{ animationDelay: "1s" }}
-              />
-              <div className="absolute inset-0 holographic opacity-20" />
-
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-primary/15 rounded-2xl flex items-center justify-center mx-auto mb-6 float-3d">
-                  <MessageCircle className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-[var(--font-rajdhani)] text-3xl font-bold text-foreground mb-4">
-                  Still have questions?
-                </h3>
-                <p className="font-[var(--font-sans)] text-muted-foreground mb-8 max-w-md mx-auto">
-                  {"Can't"} find what {"you're"} looking for? Our team is here to help you with any queries about
-                  NEXATHON 2025.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="#contact"
-                    className="group px-8 py-4 bg-primary text-primary-foreground font-[var(--font-rajdhani)] font-bold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_40px_oklch(0.78_0.22_145/0.6)] hover:scale-105 hover:-translate-y-1 inline-flex items-center justify-center gap-2 shimmer"
-                  >
-                    <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                    Contact Us
-                  </Link>
-                  {/* <a
-                    href="mailto:hello@nexathon.tech"
-                    className="px-8 py-4 border-2 border-primary/50 text-primary font-[var(--font-rajdhani)] font-bold rounded-xl hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 hover:-translate-y-1 inline-flex items-center justify-center"
-                  >
-                    hello@nexathon.tech
-                  </a> */}
-                </div>
-              </div>
-            </div>
-          </TiltCard>
-        </ScrollAnimation>
       </div>
     </section>
   )
