@@ -124,7 +124,7 @@ export default function GallerySection() {
 
       <ScrollAnimation>
         <div 
-          className="relative h-[400px] md:h-[500px] w-full flex items-center justify-center perspective-[1000px]"
+          className="relative h-[400px] md:h-[500px] w-full flex items-center justify-center perspective-[1000px] transform-gpu"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -178,6 +178,11 @@ export default function GallerySection() {
                     src={image.src || "/placeholder.svg"}
                     alt={image.alt}
                     className="w-full h-full object-cover"
+                    loading={isActive || isPrev || isNext ? "eager" : "lazy"}
+                    decoding="async"
+                    fetchPriority={isActive || isPrev || isNext ? "high" : "low"}
+                    width={isActive ? 500 : 500}
+                    height={isActive ? 350 : 350}
                   />
                   
                   {/* Overlay Content - Only visible on active card */}
