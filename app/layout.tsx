@@ -37,6 +37,7 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 })
 
+
 export const metadata: Metadata = {
   title: "NEXATHON 2026 | VIT Chennai's Premier Hackathon",
   description: "Join VIT Chennai's most anticipated 24-hour hackathon. Build, innovate, and compete with the brightest minds in tech.",
@@ -46,11 +47,11 @@ export const metadata: Metadata = {
   publisher: 'VIT Chennai',
   icons: {
     icon: [
-      { url: '/Nexathon-Logo.jpeg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/Nexathon-Logo.jpeg', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/logo_final_bg.png', sizes: '64x64', type: 'image/jpeg' },
+      { url: '/logo_final_bg.png', sizes: '192x192', type: 'image/jpeg' },
     ],
     apple: [
-      { url: '/Nexathon-Logo.jpeg', sizes: '180x180', type: 'image/jpeg' },
+      { url: '/logo_final_bg.png', sizes: '180x180', type: 'image/jpeg' },
     ],
   },
 }

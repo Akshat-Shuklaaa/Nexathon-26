@@ -3,6 +3,8 @@
 import { Calendar, Clock } from "lucide-react"
 import SectionHeader from "@/components/features/section-header"
 import { ContactCTA } from "@/components/features/contact-cta"
+import { SimpleContactCta } from "@/components/features/simple-contact-cta"
+import Link from "next/link"
 
 // Timeline data is temporarily commented out until the schedule is finalized
 // To uncomment, remove the /* and */ at the start and end of this block
@@ -56,10 +58,12 @@ export default function TimelineSection() {
               Check back soon for updates on key dates, workshops, and important milestones!
             </p>
             <div className="mt-6">
-              <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium">
-                <Calendar className="w-4 h-4" />
-                <span>Stay Updated</span>
-              </div>
+              <SimpleContactCta>
+                <button className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium hover:bg-primary/10 transition-colors">
+                  <Calendar className="w-4 h-4" />
+                  <span>Stay Updated</span>
+                </button>
+              </SimpleContactCta>
             </div>
           </div>
         </div>
@@ -68,12 +72,11 @@ export default function TimelineSection() {
           <ContactCTA>
             <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Interested in NEXATHON 2026?</h3>
             <p className="text-muted-foreground mb-6">Be the first to know when registration opens and the schedule is released.</p>
-            <a 
-              href="#contact"
+            <button 
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
             >
               Get Notified
-            </a>
+            </button>
           </ContactCTA>
         </div>
       </div>

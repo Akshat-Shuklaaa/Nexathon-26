@@ -9,7 +9,7 @@ export default function RewardsSection() {
     <section id="about" className="relative py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Rewards & Benefits"
+          title="Rewards"
           subtitle="Exciting rewards and opportunities are on the way"
           highlight="// REWARDS"
         />
@@ -32,39 +32,10 @@ export default function RewardsSection() {
           </div>
         </ScrollAnimation>
 
-        {/* Special Category Placeholder */}
-        <ScrollAnimation className="mb-16">
-          <h3 className="font-[var(--font-rajdhani)] text-2xl font-bold text-center text-foreground mb-8">
-            Special Categories
-          </h3>
+       
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <TiltCard key={item} tiltAmount={8}>
-                <div className="p-6 bg-card/50 border border-border rounded-xl text-center hover:border-primary/30 transition-all duration-300">
-                  <p className="text-muted-foreground text-sm">
-                    Details will be announced soon
-                  </p>
-                </div>
-              </TiltCard>
-            ))}
-          </div>
-        </ScrollAnimation>
-
-        {/* Benefits Placeholder */}
-        <ScrollAnimation>
-          <TiltCard tiltAmount={5}>
-            <div className="bg-card border border-border rounded-2xl p-10 text-center">
-              <h3 className="font-[var(--font-rajdhani)] text-2xl font-bold text-foreground mb-4">
-                Participant Benefits
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Participant benefits will be disclosed shortly.  
-                Follow us for updates!
-              </p>
-            </div>
-          </TiltCard>
-        </ScrollAnimation>
+        
+        
       </div>
     </section>
   )
