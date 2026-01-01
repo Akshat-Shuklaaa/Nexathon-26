@@ -1,37 +1,9 @@
 "use client"
 
-import { Calendar, Clock, MapPin, Coffee, Code, Presentation, Award } from "lucide-react"
+import { Calendar, Clock, MapPin } from "lucide-react"
 import SectionHeader from "@/components/features/section-header"
 import ScrollAnimation from "@/components/features/scroll-animation"
-import {ContactCTA} from "@/components/features/contact-cta"
 import TiltCard from "@/components/features/tilt-card"
-
-// const scheduleData = [
-//   {
-//     day: "Hackathon Day - March 8",
-//     events: [
-//       { time: "09:00 AM", title: "Registration & Check-in", icon: Calendar, description: "Get your badges and swag" },
-//       { time: "10:00 AM", title: "Opening Ceremony", icon: Presentation, description: "Keynote & rules announcement" },
-//       { time: "11:00 AM", title: "Hacking Begins!", icon: Code, description: "Start building your projects" },
-//       { time: "01:00 PM", title: "Lunch Break", icon: Coffee, description: "Networking lunch" },
-//       { time: "03:00 PM", title: "Workshop 1: Tech Stack Deep Dive", icon: Presentation, description: "Hands-on workshop" },
-//       { time: "07:00 PM", title: "Dinner", icon: Coffee, description: "Evening refreshments" },
-//       { time: "10:00 PM", title: "Midnight Snacks", icon: Coffee, description: "Late night coding fuel" },
-//       { time: "02:00 AM", title: "Night Owl Check-in", icon: Code, description: "Progress updates" },
-//     ],
-//   },
-//   {
-//     day: "Finale - March 9",
-//     events: [
-//       { time: "07:00 AM", title: "Sunrise Breakfast", icon: Coffee, description: "Fuel up for the final stretch" },
-//       { time: "10:00 AM", title: "Hacking Ends", icon: Code, description: "Final code submission" },
-//       { time: "10:30 AM", title: "Project Demos", icon: Presentation, description: "Show what you built" },
-//       { time: "12:30 PM", title: "Lunch & Judging", icon: Coffee, description: "Enjoy lunch while judges deliberate" },
-//       { time: "02:30 PM", title: "Final Presentations", icon: Presentation, description: "Top projects present" },
-//       { time: "04:00 PM", title: "Closing Ceremony", icon: Award, description: "Winners announcement" },
-//     ],
-//   },
-// ]
 
 const venueInfo = {
   name: "Vellore Institute of Technology",
@@ -55,36 +27,56 @@ export default function ScheduleSection() {
           <TiltCard tiltAmount={6}>
             <div className="bg-card border border-border rounded-2xl p-6 md:p-8 max-w-3xl mx-auto relative overflow-hidden">
               <div className="absolute inset-0 holographic opacity-50" />
+
               <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                
+                {/* Venue Details */}
                 <div className="space-y-4">
-                  <h3 className="font-[var(--font-orbitron)] text-2xl font-bold text-foreground">{venueInfo.name}</h3>
+                  <h3 className="font-[var(--font-orbitron)] text-2xl font-bold text-foreground">
+                    {venueInfo.name}
+                  </h3>
+
                   <div className="space-y-2">
                     <div className="flex items-center gap-3 text-muted-foreground group">
                       <MapPin className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-                      <span className="font-[var(--font-sans)] text-sm">
+                      <span className="text-sm font-[var(--font-sans)]">
                         {venueInfo.address}, {venueInfo.city}
                       </span>
                     </div>
+
                     <div className="flex items-center gap-3 text-muted-foreground group">
                       <Calendar className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-                      <span className="font-[var(--font-sans)] text-sm">{venueInfo.date}</span>
+                      <span className="text-sm font-[var(--font-sans)]">
+                        {venueInfo.date}
+                      </span>
                     </div>
+
                     <div className="flex items-center gap-3 text-muted-foreground group">
                       <Clock className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-                      <span className="font-[var(--font-sans)] text-sm">{venueInfo.time}</span>
+                      <span className="text-sm font-[var(--font-sans)]">
+                        {venueInfo.time}
+                      </span>
                     </div>
                   </div>
                 </div>
-                <div className="flex-shrink-0">
-                  <div className="w-32 h-32 bg-primary/10 border border-primary/30 rounded-xl flex items-center justify-center pulse-glow">
-                    <MapPin className="w-12 h-12 text-primary" />
-                  </div>
+
+                {/* Google Map Embed */}
+                <div className="flex-shrink-0 w-full md:w-64 h-40 md:h-32 rounded-xl overflow-hidden border border-primary/30 shadow-lg hover:scale-[1.02] transition-transform">
+                  <iframe
+                    title="VIT Chennai Location"
+                    src="https://www.google.com/maps?q=Vellore+Institute+of+Technology+Chennai&output=embed"
+                    className="w-full h-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 </div>
+
               </div>
             </div>
           </TiltCard>
         </ScrollAnimation>
 
+        {/* Schedule Coming Soon */}
         <div className="relative py-16 overflow-hidden">
           <div className="max-w-2xl mx-auto text-center px-4">
             <div className="relative inline-flex items-center justify-center mb-6">
@@ -93,13 +85,16 @@ export default function ScheduleSection() {
                 <Calendar className="w-8 h-8 text-primary" />
               </div>
             </div>
+
             <h3 className="font-[var(--font-orbitron)] text-2xl md:text-3xl font-bold text-foreground mb-3">
               Schedule Coming Soon
             </h3>
+
             <p className="text-muted-foreground max-w-lg mx-auto font-[var(--font-sans)]">
-              We're working hard to finalize an amazing schedule for NEXATHON 2026. 
+              We're working hard to finalize an amazing schedule for NEXATHON 2026.
               Check back soon for updates on workshops, talks, and events!
             </p>
+
             <div className="mt-8">
               <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium">
                 <Clock className="w-4 h-4" />
@@ -108,6 +103,7 @@ export default function ScheduleSection() {
             </div>
           </div>
         </div>
+
       </div>
     </section>
   )
