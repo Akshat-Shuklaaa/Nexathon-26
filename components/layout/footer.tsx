@@ -36,7 +36,7 @@ const footerLinks = {
     },
     { 
       label: "Website", 
-      href: "https://nexusvitc-ashen.vercel.app/",
+      href: "https://nexus-website-inky.vercel.app/",
       icon: "Globe2Icon"
     },
     { 
