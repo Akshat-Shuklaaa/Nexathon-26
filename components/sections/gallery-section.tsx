@@ -142,8 +142,11 @@ export default function GallerySection() {
             return (
               <div
                 key={index}
+                role={isPrev || isNext ? "button" : undefined}
+                tabIndex={isPrev || isNext ? 0 : -1}
+                aria-label={isPrev ? "Previous image" : isNext ? "Next image" : undefined}
                 className={cn(
-                  "absolute cursor-pointer",
+                  "absolute",
                   "w-[280px] h-[200px] md:w-[500px] md:h-[350px]",
                   isHidden && "pointer-events-none"
                 )}
