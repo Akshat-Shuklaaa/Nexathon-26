@@ -8,7 +8,7 @@ import TiltCard from "@/components/features/tilt-card"
 const venueInfo = {
   name: "Vellore Institute of Technology",
   address: "Kelambakkam - Vandalur Road, Rajan Nagar",
-  city: "Chennai, Tamil Nadu 600127",
+  city: "Chennai, Tamil Nadu 600127",z
   date: "First week of March, 2026",
   time: "10:00 AM onwards",
 }
