@@ -27,6 +27,7 @@ export default function GallerySection() {
   const touchEndX = useRef<number | null>(null)
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null)
   const idleTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const lightboxOpenRef = useRef(false)
 
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % galleryImages.length)
@@ -56,6 +57,8 @@ export default function GallerySection() {
 
   const startIdleTimer = useCallback((delay = 3000) => {
     clearIdleTimer()
+    // Do not start the idle timer while the lightbox is open
+    if (lightboxOpenRef.current) return
     idleTimerRef.current = setTimeout(() => {
       setIsAutoPlaying(true)
     }, delay)
@@ -65,6 +68,8 @@ export default function GallerySection() {
     // An interaction pauses autoplay and restarts the idle timer
     setIsAutoPlaying(false)
     clearIdleTimer()
+    // Don't restart the idle timer while the lightbox is open
+    if (lightboxOpenRef.current) return
     // restart the idle timer so autoplay will resume after no interaction
     idleTimerRef.current = setTimeout(() => setIsAutoPlaying(true), 3000)
   }, [clearIdleTimer])
@@ -88,6 +93,20 @@ export default function GallerySection() {
     setLightboxOpen(false)
     startIdleTimer()
   }, [startIdleTimer])
+
+  // keep a ref in sync with the state so callbacks defined earlier can read it
+  useEffect(() => {
+    lightboxOpenRef.current = lightboxOpen
+    if (lightboxOpen) {
+      // ensure autoplay is paused while in lightbox
+      setIsAutoPlaying(false)
+      clearIdleTimer()
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+        autoPlayRef.current = null
+      }
+    }
+  }, [lightboxOpen, clearIdleTimer])
 
   // Close lightbox on Escape key and navigate with arrows when open
   useEffect(() => {
