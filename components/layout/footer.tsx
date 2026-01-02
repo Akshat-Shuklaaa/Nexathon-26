@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import Link from "next/link"
 import { Heart, ArrowUp, Terminal, Instagram, Linkedin, Github, Globe2Icon, Mail, Phone } from "lucide-react"
 import Image from "next/image"
@@ -68,6 +69,30 @@ export default function Footer() {
 
     requestAnimationFrame(step)
   }
+
+  // General smooth scroll handler for internal links (uses Lenis when available)
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href || !href.startsWith("#")) return
+    e.preventDefault()
+
+    const selector = href === "#" ? "html" : href
+    const target = document.querySelector(selector)
+    if (!target) return
+
+    if ((lenis as any)?.scrollTo) {
+      try {
+        ;(lenis as any).scrollTo(target, {
+          duration: 1.5,
+          easing: (t: number) => 0.5 - Math.cos(Math.PI * t) / 2,
+        })
+      } catch {
+        ;(lenis as any).scrollTo(target, { duration: 1.5 })
+      }
+    } else {
+      ;(target as Element).scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <footer className="relative bg-card border-t border-border">
       {/* Background effects */}
@@ -102,9 +127,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Brand with hover effects */}
           <div>
-            <Link href="/" className="group flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 border-2 border-primary rounded-lg flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <Terminal className="w-5 h-5 text-primary" />
+            <Link href="#" onClick={(e) => handleScroll(e, "#")} className="group flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                <Image src="/logo_final_bg.png" alt="Nexathon Logo" width={40} height={40} className="w-10 h-10 object-contain" />
               </div>
               <span className="font-[var(--font-orbitron)] text-xl font-bold text-foreground">
                 NEXA<span className="text-primary group-hover:glow-text transition-all">THON</span>
@@ -138,6 +163,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
+                    onClick={(e) => handleScroll(e, link.href)}
                     className="group font-[var(--font-sans)] text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2"
                   >
                     <span className="w-0 h-px bg-primary group-hover:w-3 transition-all duration-300" />
@@ -215,6 +241,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Link
               href="#contact"
+              onClick={(e) => handleScroll(e, "#contact")}
               className="font-[var(--font-rajdhani)] text-sm text-primary hover:underline hover:glow-text transition-all"
             >
               Contact Us
