@@ -6,16 +6,18 @@ import ScrollAnimation from "@/components/features/scroll-animation"
 import TiltCard from "@/components/features/tilt-card"
 
 const venueInfo = {
-  name: "Vellore Institute of Technology",
+  name: "Vellore Institute of Technology, Chennai",
   address: "Kelambakkam - Vandalur Road, Rajan Nagar",
   city: "Chennai, Tamil Nadu 600127",z
   date: "First week of March, 2026",
   time: "10:00 AM onwards",
+  mapLink:
+    "https://www.google.com/maps/place/Vellore+Institute+of+Technology,+Chennai/",
 }
 
 export default function ScheduleSection() {
   return (
-    <section id="about" className="relative py-20 md:py-32 bg-muted/30">
+    <section id="about" className="relative py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Event Schedule"
@@ -73,8 +75,6 @@ export default function ScheduleSection() {
 
               </div>
             </div>
-          </TiltCard>
-        </ScrollAnimation>
 
         {/* Schedule Coming Soon */}
         <div className="relative py-16 overflow-hidden">
@@ -99,8 +99,8 @@ export default function ScheduleSection() {
               <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium">
                 <Clock className="w-4 h-4" />
                 <span>Stay Tuned</span>
-              </div>
-            </div>
+              </button>
+            </SimpleContactCta>
           </div>
         </div>
 

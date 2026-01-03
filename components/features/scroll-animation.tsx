@@ -42,7 +42,8 @@ export default function ScrollAnimation({
           observer.unobserve(entry.target)
         }
       },
-      { threshold: 0.1, rootMargin: "50px" },
+      // use a smaller rootMargin to reduce premature intersection triggers
+      { threshold: 0.15, rootMargin: "20px 0px" },
     )
 
     if (ref.current) {
@@ -66,7 +67,11 @@ export default function ScrollAnimation({
   }
 
   return (
-    <div ref={ref} className={`transition-all duration-700 ease-out ${getAnimationClasses()} ${className}`}>
+    <div
+      ref={ref}
+      // limit transitions to transform and opacity to avoid layout recalculations
+      className={`transition-opacity transition-transform duration-700 ease-out ${getAnimationClasses()} ${className}`}
+    >
       {children}
     </div>
   )

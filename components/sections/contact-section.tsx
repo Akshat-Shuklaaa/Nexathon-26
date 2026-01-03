@@ -89,7 +89,7 @@ const socialLinks = [
   },
   { 
     icon: Globe2Icon, 
-    href: "https://nexusvitc-ashen.vercel.app/", 
+    href: "https://nexus-website-inky.vercel.app/", 
     label: "Website" 
   },
   { 

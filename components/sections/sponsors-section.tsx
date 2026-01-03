@@ -52,7 +52,10 @@ export default function SponsorsSection() {
                 Partner with us to connect with talented developers and innovators
               </p>
               <a
-                href="#contact"
+                onClick={() => {
+    const el = document.getElementById('contact');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  }}
                 className="relative z-10 inline-flex px-6 py-3 bg-primary text-primary-foreground font-[var(--font-rajdhani)] font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,136,0.5)] hover:scale-105"
               >
                 Get Sponsorship Deck

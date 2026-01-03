@@ -54,8 +54,8 @@ export const eventInfo = {
   duration: "24 Hours",
   venue: "VIT CHENNAI",
   venueShort: "VIT CHENNAI",
-  participantCount: 500,
-  mentorCount: 50,
+  participantCount: 1000,
+  // mentorCount: ,
   prizePool: "₹5,00,000",
   registrationFee: "₹500 per team",
   teamSize: "2-4 members",
@@ -137,8 +137,8 @@ export const aboutData = {
     },
   ],
   stats: [
-    { value: 500, suffix: "+", label: "Participants" },
-    { value: 50, suffix: "+", label: "Mentors" },
+    { value: 1000, suffix: "+", label: "Participants" },
+    // { value: 50, suffix: "+", label: "Mentors" },
     { value: 24, suffix: "", label: "Hours" },
   ],
 }
@@ -637,8 +637,8 @@ export const navigationData = {
     // { href: "#rewards", label: "Rewards" },
     // { href: "#register", label: "Register" },
     { href: "#themes", label: "Themes" },
-    { href: "#faq", label: "FAQ" },
     { href: "#gallery", label: "Gallery" },
+    { href: "#faq", label: "FAQ" },
     { href: "#contact", label: "Contact" },
   ],
 }
