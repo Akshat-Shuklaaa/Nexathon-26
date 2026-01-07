@@ -75,7 +75,7 @@ export default function ScheduleSection() {
 
               </div>
             </div>
-
+          </TiltCard>
         {/* Schedule Coming Soon */}
         <div className="relative py-16 overflow-hidden">
           <div className="max-w-2xl mx-auto text-center px-4">
@@ -99,9 +99,11 @@ export default function ScheduleSection() {
               <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium">
                 <Clock className="w-4 h-4" />
                 <span>Stay Tuned</span>
+              </div>
+            </div>
           </div>
         </div>
-
+        </ScrollAnimation>
       </div>
     </section>
   )

@@ -7,16 +7,16 @@ import { cn } from "@/lib/utils"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 const galleryImages = [
-  { src: "/img6.jpg", alt: "Coding Session" },
-  { src: "/img7.jpg", alt: "Workshop" },
-  { src: "/img5.jpg", alt: "Team Collaboration" },
-  { src: "/img1.jpg", alt: "Award Ceremony" },
-  { src: "/img2.jpg", alt: "Networking" },
-  { src: "/img3.jpg", alt: "Project Demo" },
-  { src: "/img4.jpg", alt: "Mentoring" },
-  { src: "/img10.jpg", alt: "Late Night Coding" },
-  { src: "/img8.jpg", alt: "Food & Fun" },
-  { src: "/img9.jpg", alt: "Celebration" },
+  { src: "/img6.jpg", alt: "Nexus Forum" },
+  { src: "/img7.jpg", alt: "Nexus Forum" },
+  { src: "/img5.jpg", alt: "Koi toh event hai idk😅🥺👉🏼👈🏼" },
+  { src: "/img1.jpg", alt: "DecodeX" },
+  { src: "/img2.jpg", alt: "DecodeX Featuring Me 😎😎" },
+  { src: "/img3.jpg", alt: "Nexus Forum" },
+  { src: "/img4.jpg", alt: "DecodeX" },
+  { src: "/img10.jpg", alt: "Nexus Forum" },
+  { src: "/img8.jpg", alt: "Nexus Forum" },
+  { src: "/img9.jpg", alt: "Koi toh event hai idk😅🥺👉🏼👈🏼" },
 ]
 
 export default function GallerySection() {
