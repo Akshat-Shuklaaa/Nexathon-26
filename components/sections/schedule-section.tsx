@@ -99,8 +99,6 @@ export default function ScheduleSection() {
               <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium">
                 <Clock className="w-4 h-4" />
                 <span>Stay Tuned</span>
-              </button>
-            </SimpleContactCta>
           </div>
         </div>
 
