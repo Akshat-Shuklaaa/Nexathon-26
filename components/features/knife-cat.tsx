@@ -21,11 +21,11 @@ export default function KnifeCat() {
       }
     }
 
-    // Show after 5s and stay visible
+    // Show after 10s and stay visible
     const initial = setTimeout(() => {
       setCatState("asking")
       setIsVisible(true)
-    }, 5000)
+    }, 15000)
     
     return () => clearTimeout(initial)
   }, [dismissed])
@@ -75,6 +75,9 @@ export default function KnifeCat() {
   }
 
   if (dismissed && !isVisible && !isExiting) return null
+  
+  // Don't render anything until visible (prevents flash before animation)
+  if (!isVisible && !isExiting) return null
 
   const isAngry = catState === "angry"
   const isHappy = catState === "happy"
