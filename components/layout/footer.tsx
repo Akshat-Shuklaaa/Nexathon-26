@@ -164,6 +164,8 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     onClick={(e) => handleScroll(e, link.href)}
+                    target={link.href && link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href && link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="group font-[var(--font-sans)] text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2"
                   >
                     <span className="w-0 h-px bg-primary group-hover:w-3 transition-all duration-300" />
