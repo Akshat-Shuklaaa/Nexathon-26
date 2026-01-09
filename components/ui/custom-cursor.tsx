@@ -63,7 +63,7 @@ export default function CustomCursor() {
     if (!isVisible) return null
 
     return (
-        <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden mix-blend-difference">
+        <div className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden mix-blend-difference">
             {/* Main Cursor Dot */}
             <motion.div
                 className="absolute h-4 w-4 rounded-full bg-primary shadow-[0_0_10px_var(--color-primary)]"

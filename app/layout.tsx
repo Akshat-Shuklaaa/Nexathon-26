@@ -4,6 +4,7 @@ import { Orbitron, Rajdhani, Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } 
 import { Analytics } from "@vercel/analytics/next"
 import CustomCursor from "@/components/ui/custom-cursor"
 import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider"
+import KnifeCat from "@/components/features/knife-cat"
 import "./globals.css"
 
 const orbitron = Orbitron({
@@ -85,6 +86,7 @@ export default function RootLayout({
         <CustomCursor />
         <SmoothScrollProvider>
           {children}
+          <KnifeCat />
         </SmoothScrollProvider>
         <Analytics />
       </body>
