@@ -7,16 +7,18 @@ import { cn } from "@/lib/utils"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 const galleryImages = [
-  { src: "/img6.jpg", alt: "Nexus Forum" },
-  { src: "/img7.jpg", alt: "Nexus Forum" },
-  { src: "/img5.jpg", alt: "Koi toh event hai idk😅🥺👉🏼👈🏼" },
-  { src: "/img1.jpg", alt: "DecodeX" },
-  { src: "/img2.jpg", alt: "DecodeX Featuring Me 😎😎" },
-  { src: "/img3.jpg", alt: "Nexus Forum" },
-  { src: "/img4.jpg", alt: "DecodeX" },
-  { src: "/img10.jpg", alt: "Nexus Forum" },
-  { src: "/img8.jpg", alt: "Nexus Forum" },
-  { src: "/img9.jpg", alt: "Koi toh event hai idk😅🥺👉🏼👈🏼" },
+  { src: "/Event-gallery/img01.jpg", alt: "Nexathon' 25" },
+  { src: "/Event-gallery/img02.jpg", alt: "Nexathon' 25" },
+  { src: "/Event-gallery/img03.jpg", alt: "Nexathon' 25" },
+  { src: "/Event-gallery/img04.jpg", alt: "Nexathon' 25" },
+  { src: "/Event-gallery/img05.jpg", alt: "Nexus Forum" },
+  { src: "/Event-gallery/img06.jpg", alt: "Nexus Forum" },
+  { src: "/Event-gallery/img07.jpg", alt: "Nexus Forum" },
+  { src: "/Event-gallery/img08.jpg", alt: "Nexus Forum" },
+  { src: "/Event-gallery/img09.jpg", alt: "Nexus Forum" },
+  { src: "/Event-gallery/img10.jpg", alt: "CodeNexus" },
+  { src: "/Event-gallery/img11.jpg", alt: "CodeNexus" },
+  { src: "/Event-gallery/img12.jpg", alt: "CodeNexus" },
 ]
 
 export default function GallerySection() {
