@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import SectionHeader from "@/components/features/section-header"
 import ScrollAnimation from "@/components/features/scroll-animation"
 import { cn } from "@/lib/utils"
@@ -23,6 +24,7 @@ const galleryImages = [
 
 export default function GallerySection() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
   // autoplay will start only after a period of inactivity
   const [isAutoPlaying, setIsAutoPlaying] = useState(false)
   const touchStartX = useRef<number | null>(null)
@@ -39,76 +41,102 @@ export default function GallerySection() {
     setActiveIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
   }, [])
 
-  // Auto-rotation
-  useEffect(() => {
-    if (isAutoPlaying) {
-      autoPlayRef.current = setInterval(handleNext, 5000)
-    }
-    return () => {
-      if (autoPlayRef.current) clearInterval(autoPlayRef.current)
-    }
-  }, [isAutoPlaying, handleNext])
+  // ----------------------------------------------------
+  // Autoplay Logic
+  // ----------------------------------------------------
+  
+  // Resets the inactivity timer. 
+  // If no activity for 15s (15000ms), enable autoplay.
+  const resetInactivityTimer = useCallback(() => {
+    // 1. Always stop playing on activity
+    setIsAutoPlaying(false)
 
-  // Idle timer helpers: start autoplay only after no interaction for a delay
-  const clearIdleTimer = useCallback(() => {
+    // 2. Clear existing timer
     if (idleTimerRef.current) {
       clearTimeout(idleTimerRef.current)
-      idleTimerRef.current = null
     }
+
+    // 3. Set new timer to start autoplay after 15s
+    // If lightbox is open when timer fires, close it and start autoplay
+    idleTimerRef.current = setTimeout(() => {
+      if (lightboxOpenRef.current) {
+        setLightboxOpen(false)
+      }
+      setIsAutoPlaying(true)
+    }, 15000)
   }, [])
 
-  const startIdleTimer = useCallback((delay = 3000) => {
-    clearIdleTimer()
-    // Do not start the idle timer while the lightbox is open
-    if (lightboxOpenRef.current) return
-    idleTimerRef.current = setTimeout(() => {
-      setIsAutoPlaying(true)
-    }, delay)
-  }, [clearIdleTimer])
-
-  const recordInteraction = useCallback(() => {
-    // An interaction pauses autoplay and restarts the idle timer
-    setIsAutoPlaying(false)
-    clearIdleTimer()
-    // Don't restart the idle timer while the lightbox is open
-    if (lightboxOpenRef.current) return
-    // restart the idle timer so autoplay will resume after no interaction
-    idleTimerRef.current = setTimeout(() => setIsAutoPlaying(true), 3000)
-  }, [clearIdleTimer])
-
-  // start the idle timer on mount so autoplay begins after initial inactivity
+  // Effect: Handle Autoplay Interval
   useEffect(() => {
-    startIdleTimer()
-    return () => clearIdleTimer()
-  }, [startIdleTimer, clearIdleTimer])
+    if (!isAutoPlaying) {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+        autoPlayRef.current = null
+      }
+      return
+    }
 
-  // Lightbox handlers
-  const [lightboxOpen, setLightboxOpen] = useState(false)
+    // Clear any existing interval
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current)
+    }
 
-  const openLightbox = useCallback(() => {
-    setLightboxOpen(true)
-    setIsAutoPlaying(false)
-    clearIdleTimer()
-  }, [clearIdleTimer])
+    // Start rotation
+    autoPlayRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % galleryImages.length)
+    }, 5000)
 
-  const closeLightbox = useCallback(() => {
-    setLightboxOpen(false)
-    startIdleTimer()
-  }, [startIdleTimer])
-
-  // keep a ref in sync with the state so callbacks defined earlier can read it
-  useEffect(() => {
-    lightboxOpenRef.current = lightboxOpen
-    if (lightboxOpen) {
-      // ensure autoplay is paused while in lightbox
-      setIsAutoPlaying(false)
-      clearIdleTimer()
+    return () => {
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current)
         autoPlayRef.current = null
       }
     }
-  }, [lightboxOpen, clearIdleTimer])
+  }, [isAutoPlaying])
+
+  // Effect: Global Activity Listeners (Mouse move, Touch, Keypress)
+  useEffect(() => {
+    // Attach listeners to window to detect ANY activity
+    const handleActivity = () => resetInactivityTimer()
+
+    window.addEventListener("mousemove", handleActivity)
+    window.addEventListener("touchstart", handleActivity)
+    window.addEventListener("keydown", handleActivity)
+    window.addEventListener("scroll", handleActivity)
+    window.addEventListener("click", handleActivity)
+
+    // Initialize timer on mount
+    resetInactivityTimer()
+
+    return () => {
+      window.removeEventListener("mousemove", handleActivity)
+      window.removeEventListener("touchstart", handleActivity)
+      window.removeEventListener("keydown", handleActivity)
+      window.removeEventListener("scroll", handleActivity)
+      window.removeEventListener("click", handleActivity)
+      
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+    }
+  }, [resetInactivityTimer])
+
+  // Lightbox handlers
+  const openLightbox = useCallback(() => {
+    setLightboxOpen(true)
+    // Force stop autoplay and clear timer
+    setIsAutoPlaying(false)
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+  }, [])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false)
+    // Restart inactivity timer
+    resetInactivityTimer()
+  }, [resetInactivityTimer])
+
+  // Sync ref
+  useEffect(() => {
+    lightboxOpenRef.current = lightboxOpen
+  }, [lightboxOpen])
 
   // Close lightbox on Escape key and navigate with arrows when open
   useEffect(() => {
@@ -119,6 +147,8 @@ export default function GallerySection() {
         if (e.key === "ArrowRight") handleNext()
       }
     }
+    // We don't attach this via the global activity listener above strictly, 
+    // but the global listener covers 'keydown' so activity is detected.
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [lightboxOpen, closeLightbox, handlePrev, handleNext])
@@ -126,7 +156,7 @@ export default function GallerySection() {
   // Swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX
-    recordInteraction()
+    resetInactivityTimer() // Activity detected
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -145,8 +175,7 @@ export default function GallerySection() {
 
     touchStartX.current = null
     touchEndX.current = null
-    // mark this as an interaction and restart idle timer
-    recordInteraction()
+    resetInactivityTimer() // Activity detected
   }
 
   const getCardStatus = (index: number) => {
@@ -165,7 +194,7 @@ export default function GallerySection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <SectionHeader
           title="Gallery"
-          subtitle="Glimpses from our previous hackathons"
+          subtitle="Glimpses from our previous Events"
           highlight="// GALLERY"
         />
       </div>
@@ -176,8 +205,8 @@ export default function GallerySection() {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          onMouseEnter={recordInteraction}
-          onMouseLeave={() => startIdleTimer()}
+          onMouseEnter={resetInactivityTimer}
+          onMouseLeave={resetInactivityTimer}
         >
           {galleryImages.map((image, index) => {
             const status = getCardStatus(index)
@@ -291,88 +320,97 @@ export default function GallerySection() {
       </ScrollAnimation>
 
       {/* Lightbox Modal */}
-      {lightboxOpen && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          onClick={closeLightbox}
-        >
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black/90 backdrop-blur-md"
-            style={{
-              animation: "fadeIn 300ms ease-out forwards"
-            }}
-          />
-          
-          {/* Close button */}
-          <button
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             onClick={closeLightbox}
-            className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
-            aria-label="Close lightbox"
           >
-            <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
-          </button>
-
-          {/* Navigation buttons */}
-          <button
-            onClick={(e) => { e.stopPropagation(); handlePrev() }}
-            className="absolute left-4 md:left-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="w-8 h-8 text-white group-hover:-translate-x-1 transition-transform" />
-          </button>
-          
-          <button
-            onClick={(e) => { e.stopPropagation(); handleNext() }}
-            className="absolute right-4 md:right-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
-            aria-label="Next image"
-          >
-            <ChevronRight className="w-8 h-8 text-white group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          {/* Image container */}
-          <div 
-            className="relative z-10 w-[90vw] h-[80vh] max-w-6xl flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              animation: "scaleIn 400ms cubic-bezier(0.23,1,0.32,1) forwards"
-            }}
-          >
-            <img
-              src={galleryImages[activeIndex].src}
-              alt={galleryImages[activeIndex].alt}
-              className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
-              style={{
-                boxShadow: "0 0 80px rgba(var(--primary-rgb),0.3)"
-              }}
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-black/90 backdrop-blur-md"
             />
             
-            {/* Image caption */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 bg-black/60 backdrop-blur-sm rounded-full border border-white/10">
-              <p className="text-white font-[var(--font-rajdhani)] font-bold text-lg">
-                {galleryImages[activeIndex].alt}
-              </p>
-            </div>
-          </div>
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+              aria-label="Close lightbox"
+            >
+              <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
+            </button>
 
-          {/* Image counter */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2">
-            {galleryImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={(e) => { e.stopPropagation(); setActiveIndex(idx) }}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  idx === activeIndex 
-                    ? "w-8 bg-primary shadow-[0_0_10px_oklch(0.78_0.22_145/0.5)]" 
-                    : "bg-white/30 hover:bg-white/50"
-                )}
-                aria-label={`Go to image ${idx + 1}`}
+            {/* Navigation buttons */}
+            <button
+              onClick={(e) => { e.stopPropagation(); handlePrev() }}
+              className="absolute left-4 md:left-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-8 h-8 text-white group-hover:-translate-x-1 transition-transform" />
+            </button>
+            
+            <button
+              onClick={(e) => { e.stopPropagation(); handleNext() }}
+              className="absolute right-4 md:right-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-8 h-8 text-white group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            {/* Image container */}
+            <motion.div 
+              className="relative z-10 w-full max-w-5xl aspect-video flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ 
+                type: "spring",
+                damping: 25,
+                stiffness: 300,
+                opacity: { duration: 0.2 } 
+              }}
+            >
+              <img
+                src={galleryImages[activeIndex].src}
+                alt={galleryImages[activeIndex].alt}
+                className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+                style={{
+                  boxShadow: "0 0 80px rgba(var(--primary-rgb),0.3)"
+                }}
               />
-            ))}
-          </div>
-        </div>
-      )}
+              
+              {/* Image caption */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 bg-black/60 backdrop-blur-sm rounded-full border border-white/10">
+                <p className="text-white font-[var(--font-rajdhani)] font-bold text-lg">
+                  {galleryImages[activeIndex].alt}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Image counter */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2">
+              {galleryImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => { e.stopPropagation(); setActiveIndex(idx) }}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-300",
+                    idx === activeIndex 
+                      ? "w-8 bg-primary shadow-[0_0_10px_oklch(0.78_0.22_145/0.5)]" 
+                      : "bg-white/30 hover:bg-white/50"
+                  )}
+                  aria-label={`Go to image ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style jsx>{` 
         @keyframes fadeIn {
