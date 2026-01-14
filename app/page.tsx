@@ -14,6 +14,7 @@ import FaqSection from "@/components/sections/faq-section"
 import GallerySection from "@/components/sections/gallery-section"
 import ContactSection from "@/components/sections/contact-section"
 import MatrixBackground from "@/components/features/matrix-background"
+import FloatingSectionPill from "@/components/features/floating-section-pill"
 import { useEffect } from 'react'
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
       <MatrixBackground />
       <div className="relative z-10">
         <Navbar />
+        <FloatingSectionPill />
         <HeroSection />
         <AboutSection />
         <ThemeSection />
