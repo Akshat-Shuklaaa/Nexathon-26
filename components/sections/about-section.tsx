@@ -64,20 +64,25 @@ export default function AboutSection() {
                 />
 
                 {/* Center content with 3D effect */}
-                <TiltCard tiltAmount={15} className="absolute inset-12 group">
-                  <div className="h-full bg-card/60 backdrop-blur-sm rounded-xl border border-border flex items-center justify-center overflow-hidden">
-                    <div className="text-center p-6 relative z-10">
-                      <AnimatedCounter
-                        end={24}
-                        className="font-[var(--font-orbitron)] text-7xl md:text-8xl font-bold text-gradient-animated"
-                      />
-                      <div className="font-[var(--font-rajdhani)] text-xl text-muted-foreground tracking-wide mt-2">
-                        Hours of Innovation
-                      </div>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 group-hover:opacity-80 transition-opacity" />
-                  </div>
-                </TiltCard>
+                <TiltCard
+  tiltAmount={15}
+  className="absolute inset-0 flex items-center justify-center group"
+>
+  <div className="w-[70%] h-[70%] bg-card/60 backdrop-blur-sm rounded-xl border border-border flex items-center justify-center overflow-hidden">
+    <div className="text-center p-6 relative z-10">
+      <AnimatedCounter
+        end={24}
+        className="font-[var(--font-orbitron)] text-7xl md:text-8xl font-bold text-gradient-animated"
+      />
+      <div className="font-[var(--font-rajdhani)] text-xl text-muted-foreground tracking-wide mt-2">
+        Hours of Innovation
+      </div>
+    </div>
+
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 group-hover:opacity-80 transition-opacity" />
+  </div>
+</TiltCard>
+
 
                 <div className="absolute top-2 right-2 w-14 h-14 bg-primary/15 rounded-lg float-3d" />
                 <div
