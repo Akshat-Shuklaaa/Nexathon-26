@@ -61,8 +61,8 @@ const contactInfo = [
     title: "Call Us",
     value: (
       <div className="flex flex-col gap-1">
-        <a href="Sanchari Das - tel:+919555401204" className="hover:underline hover:text-primary">+91 95554 01204</a>
-        <a href="Baibhav Bharadwaj Uzir - tel:+917002998267" className="hover:underline hover:text-primary">+91 70029 98267</a>
+        <a href="tel:+919555401204" className="hover:underline hover:text-primary">Sanchari Das - +91 95554 01204</a>
+        <a href="tel:+917002998267" className="hover:underline hover:text-primary">Baibhav Bharadwaj Uzir - +91 70029 98267</a>
       </div>
     ),
     link: "#",
