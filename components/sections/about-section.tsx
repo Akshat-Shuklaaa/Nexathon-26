@@ -64,9 +64,9 @@ export default function AboutSection() {
                 />
 
                 {/* Center content with 3D effect */}
-                <TiltCard
+               <TiltCard
   tiltAmount={15}
-  className="absolute inset-0 flex items-center justify-center group"
+  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group"
 >
   <div className="w-[70%] h-[70%] bg-card/60 backdrop-blur-sm rounded-xl border border-border flex items-center justify-center overflow-hidden">
     <div className="text-center p-6 relative z-10">
