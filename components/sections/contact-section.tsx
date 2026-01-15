@@ -244,7 +244,7 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                       className="w-full px-4 py-3 bg-muted border border-border rounded-lg font-[var(--font-sans)] text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-all duration-300 focus:shadow-[0_0_20px_oklch(0.78_0.22_145/0.2)]"
                     />
                   </div>
@@ -258,7 +258,7 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      placeholder="john@example.com"
+                      placeholder="Your Email"
                       className="w-full px-4 py-3 bg-muted border border-border rounded-lg font-[var(--font-sans)] text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-all duration-300 focus:shadow-[0_0_20px_oklch(0.78_0.22_145/0.2)]"
                     />
                   </div>
