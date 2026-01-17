@@ -323,31 +323,34 @@ export default function GallerySection() {
       <AnimatePresence>
         {lightboxOpen && (
           <motion.div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={closeLightbox}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Backdrop */}
             <div 
-              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+              className="absolute inset-0 bg-black/95 sm:bg-black/90 backdrop-blur-md"
             />
             
             {/* Close button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+              className="absolute top-3 right-3 sm:top-6 sm:right-6 z-50 p-2 sm:p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
               aria-label="Close lightbox"
             >
-              <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
             </button>
 
-            {/* Navigation buttons */}
+            {/* Navigation buttons - hidden on mobile, use swipe instead */}
             <button
               onClick={(e) => { e.stopPropagation(); handlePrev() }}
-              className="absolute left-4 md:left-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+              className="hidden sm:flex absolute left-4 md:left-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-8 h-8 text-white group-hover:-translate-x-1 transition-transform" />
@@ -355,7 +358,7 @@ export default function GallerySection() {
             
             <button
               onClick={(e) => { e.stopPropagation(); handleNext() }}
-              className="absolute right-4 md:right-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+              className="hidden sm:flex absolute right-4 md:right-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
               aria-label="Next image"
             >
               <ChevronRight className="w-8 h-8 text-white group-hover:translate-x-1 transition-transform" />
@@ -363,7 +366,7 @@ export default function GallerySection() {
 
             {/* Image container */}
             <motion.div 
-              className="relative z-10 w-full max-w-5xl aspect-video flex items-center justify-center"
+              className="relative z-10 w-full max-w-5xl flex items-center justify-center px-2 sm:px-0"
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -378,22 +381,22 @@ export default function GallerySection() {
               <img
                 src={galleryImages[activeIndex].src}
                 alt={galleryImages[activeIndex].alt}
-                className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+                className="max-w-full max-h-[70vh] sm:max-h-[80vh] object-contain rounded-lg sm:rounded-2xl shadow-2xl"
                 style={{
                   boxShadow: "0 0 80px rgba(var(--primary-rgb),0.3)"
                 }}
               />
               
               {/* Image caption */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 bg-black/60 backdrop-blur-sm rounded-full border border-white/10">
-                <p className="text-white font-[var(--font-rajdhani)] font-bold text-lg">
+              <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 sm:px-6 sm:py-3 bg-black/60 backdrop-blur-sm rounded-full border border-white/10">
+                <p className="text-white font-[var(--font-rajdhani)] font-bold text-sm sm:text-lg whitespace-nowrap">
                   {galleryImages[activeIndex].alt}
                 </p>
               </div>
             </motion.div>
 
-            {/* Image counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2">
+            {/* Image counter - hidden on very small screens */}
+            <div className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-50 gap-2">
               {galleryImages.map((_, idx) => (
                 <button
                   key={idx}
@@ -407,6 +410,11 @@ export default function GallerySection() {
                   aria-label={`Go to image ${idx + 1}`}
                 />
               ))}
+            </div>
+            
+            {/* Mobile swipe hint - only on small screens */}
+            <div className="sm:hidden absolute bottom-4 left-1/2 -translate-x-1/2 z-50 text-white/50 text-xs font-[var(--font-rajdhani)]">
+              Swipe to navigate • {activeIndex + 1}/{galleryImages.length}
             </div>
           </motion.div>
         )}
